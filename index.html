@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Von Selector</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Process Dropdown</h1>
+        <select name="dropdown" id="dropdown" class="select2 form-control"> </select>
+        <br/> <br/>
+        <img class="img-fluid" id="imagePlaceholder">
+
+    </div>
+</body>
+
+<!-- DEPENDENCIES -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script defer>
+    $(document).ready(function () {
+        $('#dropdown').select2();
+
+
+        const items = [
+            {
+                id: 'reverification1',
+                label: 're Verification',
+                url: './sample1.png'
+            },
+            {
+                id: 'reverification2',
+                label: 're Verification2',
+                url: './sample2.png'
+            },
+        ];
+
+
+        console.log(items)
+        console.log(items.length)
+
+
+        let options = `<option hidden disabled selected>-- Select Process --</option>`;
+        items.forEach(item => {
+            console.log(item.name);
+            console.log(item.url);
+
+            options += `<option value=${item.id}>${item.label}</option>`;
+        });
+
+        $('#dropdown').html(options);
+
+        $('#dropdown').on('change', (e) => {
+            let selectedItem = e.target.value;
+            let selectedUrl = items.filter(i=>i.id==selectedItem)[0].url;
+
+            $('#imagePlaceholder').attr('src', selectedUrl);
+        })
+
+    });
+
+</script>
+
+</html>
